@@ -1,3 +1,15 @@
-.hello{
-  background-color: rgb(0, 255, 229);
+.dark,
+.light{
+  width: 100vw ;
+  height: 100vh;
+}
+
+.dark {
+  background-color: black;
+  color: white;
+}
+
+.light {
+  background-color: rgb(219,219,219);
+  color: black;
 }
