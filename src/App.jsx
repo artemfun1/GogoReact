@@ -114,39 +114,88 @@
 
 // export default App
 
-import React, { useEffect, useState } from "react";
-import Children from "./Children";
+// import React, { useEffect, useState } from "react";
+// import Children from "./Children";
 
-const App = () => {
+// const App = () => {
 
-  const [state,setState] = useState(false)
-  const onClickHandler=()=>{
-    // setState(!state)
-    setState((value)=>!value)
-  }
+//   const [state,setState] = useState(false)
+//   const onClickHandler=()=>{
+//     // setState(!state)
+//     setState((value)=>!value)
+//   }
 
-  const [count,setCount] = useState(0)
-  const countHandler=()=>{
-    // setState(!state)
-    setCount((value)=> ++value)
-  }
+//   const [count,setCount] = useState(0)
+//   const countHandler=()=>{
+//     // setState(!state)
+//     setCount((value)=> ++value)
+//   }
 
 
 
-  return(
+//   return(
 
-    <div> 
-      <p>{count}</p>
+//     <div> 
+//       <p>{count}</p>
 
-      <button onClick={countHandler}>++++</button>
+//       <button onClick={countHandler}>++++</button>
 
-      <button onClick={onClickHandler}>switch</button>
+//       <button onClick={onClickHandler}>switch</button>
 
-    {state && <Children count ={count} />}
+//     {state && <Children count ={count} />}
 
-    </div>
+//     </div>
 
-  )
-}
+//   )
+// }
 
-export default App
+// export default App
+
+
+import React, { useState, useMemo } from "react";
+import "./index.css";
+
+
+const App = ({ users }) => {
+
+	const [isDark, setIsDark] = useState(false);
+
+  const convertedUsers = useMemo(()=>{
+    const result = Object.keys(users).map((userKey)=>{
+      console.log(userKey)
+      const user = users[userKey]
+      return {
+        id:user.id,
+        name: user.name,
+        age: user.age
+      }
+    })
+
+    return result
+  },[users])
+
+	// console.log(users)
+	// console.log(convertedUsers)
+
+	const onClickHandler = () => {
+		setIsDark((value) => !value);
+	};
+
+	return (
+		<div className={isDark ? 'dark' :   'light'}>
+			<button onClick={onClickHandler}>Темная тема</button>
+
+
+			{convertedUsers.map((user) => {
+        return(
+				<div key={user.id}>
+					Имя: {user.name}
+					Возраст: {user.age}
+				</div>
+			)
+      })}
+		</div>
+	);
+};
+
+export default App;
